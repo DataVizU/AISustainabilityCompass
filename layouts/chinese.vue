@@ -16,7 +16,7 @@ const clickNavItem = (index: number) => {
       <div class="flex flex-row items-center gap-12">
         <div class="h-full flex flex-row gap-6 items-center select-none">
           <NuxtLink
-            to="/"
+            to="/zh"
             class="nav-item"
             :class="{
               'font-medium underline': selectedNavItem === 0,
@@ -26,7 +26,7 @@ const clickNavItem = (index: number) => {
             >条件</NuxtLink
           >
           <NuxtLink
-            to="/evaluation"
+            to="/zh/evaluation"
             class="nav-item"
             :class="{
               'font-medium underline': selectedNavItem === 1,
@@ -37,7 +37,7 @@ const clickNavItem = (index: number) => {
           >
           <NuxtLink
             id="strategy-item"
-            to="/strategy"
+            to="/zh/strategy"
             class="nav-item"
             :class="{
               'font-medium underline': selectedNavItem === 2,
@@ -48,7 +48,7 @@ const clickNavItem = (index: number) => {
           >
           <NuxtLink
             id="about-item"
-            to="/about"
+            to="/zh/about"
             class="nav-item"
             :class="{
               'font-medium underline': selectedNavItem === 3,
@@ -59,7 +59,7 @@ const clickNavItem = (index: number) => {
           >
         </div>
         <a
-          href="https://github.com/DataVizU/RegionalLLMSustainability"
+          href="https://github.com/DataVizU/AISustainabilityCompass"
           target="_blank"
         >
           <img src="../assets/img/github.svg" class="w-6" alt="Github" />

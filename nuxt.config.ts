@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: "LLM Compass",
+      title: "AI Sustainability Compass",
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
       htmlAttrs: {
         lang: "en",
