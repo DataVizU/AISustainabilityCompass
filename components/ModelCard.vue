@@ -110,7 +110,7 @@ onMounted(() => {
               props.memory,
               props.throughput,
               props.energy,
-            ],
+            ].map((v) => Math.round(v)),
             label: {
               show: true,
               formatter: function (params: { value: number }) {

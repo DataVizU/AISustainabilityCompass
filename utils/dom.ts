@@ -58,3 +58,36 @@ export const getCustomLayerData = (indication: string) => {
   });
   return data;
 };
+
+export const getLocationLayerData = () => {
+  const data: {
+    type: string;
+    features: {
+      type: string;
+      geometry: {
+        type: string;
+        coordinates: [number, number];
+      };
+      properties: {
+        level: number;
+      };
+    }[];
+  } = {
+    type: "FeatureCollection",
+    features: [],
+  };
+  regionList.forEach((region: string) => {
+    const location = regionLocation[regions[region as keyof typeof regions]];
+    data.features.push({
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [location[0], location[1]],
+      },
+      properties: {
+        level: 3,
+      },
+    });
+  });
+  return data;
+};

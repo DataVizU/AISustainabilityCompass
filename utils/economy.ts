@@ -1,10 +1,15 @@
 import { chain } from "mathjs";
+import { regions } from "~/utils/region";
 
 const n = 0.63;
 const r = 1.42;
 
-const alpha = chain(n - 1).divide(n);
-const beta = chain(r - 1).divide(r);
+const alpha = chain(n - 1)
+  .divide(n)
+  .done();
+const beta = chain(r - 1)
+  .divide(r)
+  .done();
 
 const regionData2023 = {
   北京: {
@@ -197,29 +202,34 @@ const regionData2023 = {
 
 const getRegionData = (region: string) => regionData2023[region];
 
-const getGdp = (
+export const getGdp = (
   userNum: number,
   wordNum: number,
   modelName: string,
   modelSize: number,
-  city: string,
+  location: string,
 ) => {
   const cityAlpha = 1;
   const modelK = getModelK(userNum, wordNum, modelName, modelSize, cityAlpha);
-  const regionData = getRegionData("北京");
+  const regionData = getRegionData(regions[location]);
   const a = regionData.a;
   const employment = regionData.employment;
   const highlyEducated = regionData.highly_educated;
-  return chain(chain(modelK).exp(beta))
+  console.log(modelK, regionData, cityAlpha);
+  return chain(modelK)
+    .dotPow(beta)
     .add(
       chain(employment)
         .multiply(1 - highlyEducated)
-        .exp(beta),
+        .dotPow(beta)
+        .done(),
     )
-    .exp(chain(alpha).divide(beta))
-    .add(chain(employment).multiply(highlyEducated).exp(alpha))
-    .exp(alpha)
-    .multiply(a);
+    .dotPow(chain(alpha).divide(beta).done())
+    .add(chain(employment).multiply(highlyEducated).dotPow(alpha).done())
+    .dotPow(alpha)
+    .multiply(a)
+    .done()
+    .toString();
 };
 
 export const getWh = (

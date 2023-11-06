@@ -1,17 +1,35 @@
 <script setup lang="ts">
 import { regionList } from "~/utils/region";
-import { ModelInfo } from "~/utils/model";
+import {
+  getModelEnergy,
+  getModelK,
+  getModelWater,
+  ModelInfo,
+} from "~/utils/model";
+import {
+  getCustomLayer,
+  getCustomLayerData,
+  getLocationLayerData,
+} from "~/utils/dom";
+import { getGdp } from "~/utils/economy";
 
-const selectedRegion = ref("All");
+let map;
+
+let customLayer: any;
+
+const selectedRegion = ref("Beijing");
+
+const humanValue = ref(0.1);
+
+const wordNum = ref(2000);
+
+const selectedModel = ref({
+  name: "falcon",
+  size: 40,
+});
 
 const items = [
   [
-    {
-      label: "All",
-      click: () => {
-        selectedRegion.value = "All";
-      },
-    },
     ...regionList.map((region) => ({
       label: region,
       click: () => {
@@ -20,12 +38,51 @@ const items = [
     })),
   ],
 ];
+
+onMounted(() => {
+  map = new BMapGL.Map("map_container");
+  const point = new BMapGL.Point(95, 37);
+  map.centerAndZoom(point, 5);
+  map.setMapStyleV2({
+    styleId: "d8baf435b5ec45b2718d0a5c6946cf6b",
+  });
+  map.enableScrollWheelZoom(true);
+  const zoomCtrl = new BMapGL.ZoomControl();
+  map.addControl(zoomCtrl);
+
+  customLayer = getCustomLayer();
+  const data = getLocationLayerData();
+  customLayer.setData(data);
+  map.addCustomHtmlLayer(customLayer);
+});
+
+watch([humanValue, wordNum, selectedModel], (newVal) => {
+  console.log(
+    "Energy: ",
+    getModelEnergy(newVal[0], newVal[1], newVal[2].name, newVal[2].size),
+  );
+  console.log(
+    "Water: ",
+    getModelWater(newVal[0], newVal[1], newVal[2].name, newVal[2].size),
+  );
+});
+
+watch([humanValue, wordNum, selectedModel, selectedRegion], (newVal) => {
+  console.log(
+    "K: ",
+    getModelK(newVal[0], newVal[1], newVal[2].name, newVal[2].size, 1),
+  );
+  console.log(
+    "GDP: ",
+    getGdp(newVal[0], newVal[1], newVal[2].name, newVal[2].size, newVal[3]),
+  );
+});
 </script>
 
 <template>
   <div id="background">
     <div id="map_container" class="w-full h-full"></div>
-    <div class="absolute top-24 left-14 z-10 flex flex-col gap-24 select-none">
+    <div class="absolute top-24 left-14 z-10 flex flex-col gap-12 select-none">
       <div>
         <h1 class="text-3xl text-black font-bold">Deployment</h1>
         <h1 class="text-3xl text-black font-bold -mt-1">Forecasting</h1>
@@ -36,11 +93,41 @@ const items = [
           after deploying large language models?
         </h2>
       </div>
-      <div class="w-64 flex flex-col gap-10 font-light">
+      <div class="w-64 flex flex-col gap-4 font-light">
+        <UFormGroup :label="`Number of Chinese Words: ${wordNum} `">
+          <URange
+            v-model="wordNum"
+            size="xl"
+            color="purple"
+            :max="10000"
+            :min="2000"
+            :step="100"
+            :ui="{
+              progress: {
+                background: 'bg-[#5B1CF3]',
+              },
+            }"
+          />
+        </UFormGroup>
+        <UFormGroup :label="`Number of Users: ${humanValue} million`">
+          <URange
+            v-model="humanValue"
+            size="xl"
+            color="purple"
+            :max="100"
+            :min="0.1"
+            :step="0.1"
+            :ui="{
+              progress: {
+                background: 'bg-[#5B1CF3]',
+              },
+            }"
+          />
+        </UFormGroup>
         <UDropdown
           :items="items"
           :popper="{ placement: 'bottom-start' }"
-          class="mt-8 w-full h-12"
+          class="w-full h-12"
           :ui="{
             width: 'w-64',
             height: 'h-32',
@@ -73,6 +160,11 @@ const items = [
               <ModelCard
                 v-for="modelRecord in ModelInfo"
                 :key="`${modelRecord.model}-${modelRecord.size}`"
+                :class="{
+                  'border border-red-300':
+                    selectedModel.name === modelRecord.model &&
+                    selectedModel.size === modelRecord.size,
+                }"
                 :name="modelRecord.model"
                 :arc="modelRecord.arc"
                 :average="modelRecord.average"
@@ -83,6 +175,14 @@ const items = [
                 :throughput="modelRecord.throughput"
                 :energy="modelRecord.energy"
                 :size="modelRecord.size"
+                @click="
+                  () => {
+                    selectedModel = {
+                      name: modelRecord.model,
+                      size: modelRecord.size,
+                    };
+                  }
+                "
               ></ModelCard>
             </div>
           </div>
