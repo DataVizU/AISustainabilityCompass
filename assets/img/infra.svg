@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_2" data-name="图层 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 21.74 21.59">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Degradado_sin_nombre_66);
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: url(#Degradado_sin_nombre_66-2);
+      }
+
+      .cls-3 {
+        fill: url(#Degradado_sin_nombre_66-3);
+      }
+
+      .cls-4 {
+        fill: url(#Degradado_sin_nombre_66-4);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_66" data-name="Degradado sin nombre 66" x1="0" y1="10.79" x2="21.74" y2="10.79" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7314d4"/>
+      <stop offset=".47" stop-color="#7314d4"/>
+      <stop offset="1" stop-color="#7314d4"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_66-2" data-name="Degradado sin nombre 66" x1="13.07" y1="10.79" x2="14.51" y2="10.79" xlink:href="#Degradado_sin_nombre_66"/>
+    <linearGradient id="Degradado_sin_nombre_66-3" data-name="Degradado sin nombre 66" x1="10.18" y1="10.79" x2="11.62" y2="10.79" xlink:href="#Degradado_sin_nombre_66"/>
+    <linearGradient id="Degradado_sin_nombre_66-4" data-name="Degradado sin nombre 66" x1="7.29" y1="10.79" x2="8.73" y2="10.79" xlink:href="#Degradado_sin_nombre_66"/>
+  </defs>
+  <g id="OBJECTS">
+    <g>
+      <path class="cls-1" d="m21.74,9.39v2.81h-2.95c-.23,1.15-.64,2.23-1.33,3.15l2.08,2.06-2.02,2-2.08-2.06c-.92.63-2.02,1.09-3.18,1.32v2.92h-2.83v-2.98c-1.16-.23-2.26-.63-3.18-1.32l-2.08,2.06-1.97-1.95,2.08-2.06c-.64-.92-1.1-2-1.33-3.15H0v-2.81h2.95c.23-1.15.64-2.23,1.33-3.15l-2.08-2.06,2.02-2,2.08,2.06c.93-.63,2.02-1.09,3.18-1.32V0h2.83v2.92c1.16.23,2.26.63,3.18,1.32l2.08-2.06,2.02,2-2.08,2.06c.64.92,1.1,2,1.33,3.15h2.89Zm-5.2,1.43c0-3.09-2.54-5.61-5.67-5.61s-5.67,2.52-5.67,5.61,2.54,5.61,5.67,5.61,5.67-2.52,5.67-5.61Z"/>
+      <rect class="cls-2" x="13.07" y="10.08" width="1.45" height="1.43"/>
+      <rect class="cls-3" x="10.18" y="10.08" width="1.45" height="1.43"/>
+      <rect class="cls-4" x="7.29" y="10.08" width="1.45" height="1.43"/>
+    </g>
+  </g>
+</svg>
