@@ -63,7 +63,7 @@ onMounted(() => {
           Is your nation ready to navigate
         </h2>
         <h2 class="text-black font-light text-2xl -mt-1">
-          digital transformation?
+          AI transformation?
         </h2>
       </div>
       <div class="w-64 flex flex-col gap-10 font-light">

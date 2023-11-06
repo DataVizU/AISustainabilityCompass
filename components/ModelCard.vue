@@ -165,8 +165,7 @@ onMounted(() => {
         class="h-full flex-1"
         style="
           background-size: 100% 100%;
-          background: url(&quot;https://r2-img.datavizu.app/radar-back.svg&quot;)
-            no-repeat;
+          background: url(https://r2-img.datavizu.app/radar-back.svg) no-repeat;
         "
       ></div>
     </div>
